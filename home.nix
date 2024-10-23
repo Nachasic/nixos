@@ -92,16 +92,39 @@
       };
       
       "$mod" = "SUPER";
+      "$terminal" = "kitty";
       
       bind = [
-        "$mod, RETURN, exec, kitty"
+        # Terminal emulator
+        "$mod, RETURN, exec, $terminal"
+
+        # Kill active window
+        "$mod, Q, killactive"
+
+        # Moving window focus
+        "$mod, h, movefocus, l"
+        "$mod, j, movefocus, d"
+        "$mod, k, movefocus, u"
+        "$mod, l, movefocus, r"
+        
+        # Moving windows around
+        "$mod SHIFT, H, movewindow, l"
+        "$mod SHIFT, J, movewindow, d"
+        "$mod SHIFT, K, movewindow, u"
+        "$mod SHIFT, L, movewindow, r"
+
+        # Resizing windows
+        "$mod ALT, h, resizeactive, -10 0"
+        "$mod ALT, j, resizeactive, 0 10"
+        "$mod ALT, k, resizeactive, 0 -10"
+        "$mod ALT, l, resizeactive, 10 0"
+
+	# Resize windows quicker
+        "$mod SHIFT ALT, h, resizeactive, -30 0"
+        "$mod SHIFT ALT, j, resizeactive, 0 30"
+        "$mod SHIFT ALT, k, resizeactive, 0 -30"
+        "$mod SHIFT ALT, l, resizeactive, 30 0"
       ];
-      
-      # bindm = [
-      #  "$mod, mouse:272, movewindow"
-      #  "$mod, mouse:273, resizewindow"
-      #  "$mod ALT, mouse:272, resizewindow"
-      #];
     };
   };
 
