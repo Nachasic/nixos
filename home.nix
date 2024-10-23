@@ -75,13 +75,19 @@
 
   # enable kitty terminal emulator - required for hyprland defaults
   programs.kitty.enable = true;
+
+  # TUI file manager
+  programs.ranger.enable = true;
+
+  # TUI git client
+  programs.lazygit.enable = true;
+
   # Enable hyprland
   wayland.windowManager.hyprland = {
     enable = true;
     package = inputs.hyprland.packages."${pkgs.system}".hyprland;
     
     plugins = [
-      # inputs.hyprland-plugins.packages."${pkgs.system}".borders-plus-plus
       inputs.hyprland-plugins.packages."${pkgs.system}".borders-plus-plus
     ];
     
