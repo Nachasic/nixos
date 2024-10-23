@@ -90,8 +90,9 @@
     enable = true;
     package = inputs.hyprland.packages."${pkgs.system}".hyprland;
     
-    plugins = [
-      inputs.hyprland-plugins.packages."${pkgs.system}".borders-plus-plus
+    plugins = with inputs.hyprland-plugins.packages."${pkgs.system}"; [
+      borders-plus-plus
+      
     ];
     
     settings = {
@@ -138,16 +139,27 @@
         "$mod SHIFT ALT, k, resizeactive, 0 -30"
         "$mod SHIFT ALT, l, resizeactive, 30 0"
 
-        # TODO Moving between workspaces
-        # TODO Moving windows between workspaces
-        # TODO handle floating windows
+        # Handle floating windows
         "$mod, SPACE, togglefloating"
 
-        # TODO handle fullscreen modes
+        # Handle fullscreen modes
         "$mod, f, fullscreen"
 
         # TODO handled stashed windows
-      ];
+      ] ++ (
+        # Configure workspaces
+        builtins.concatLists(builtins.genList (i:
+          let ws = i + 1;
+          in [
+            # Switching to a workspace by number
+            "$mod, code:1${toString i}, workspace, ${toString ws}"
+
+            # Move active window to a workspace by number
+            "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
+          ]
+        )  
+        9)
+      );
     };
   };
 
