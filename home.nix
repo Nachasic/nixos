@@ -141,7 +141,11 @@
         # TODO Moving between workspaces
         # TODO Moving windows between workspaces
         # TODO handle floating windows
+        "$mod, SPACE, togglefloating"
+
         # TODO handle fullscreen modes
+        "$mod, f, fullscreen"
+
         # TODO handled stashed windows
       ];
     };
