@@ -65,9 +65,17 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+
+  # Configure desktop portal for screen sharing
+  services.dbus.enable = true;
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
   
   # Enable bluetooth
-  # hardware.bluetooth.enable = true;
+  hardware.bluetooth.enable = true;
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
