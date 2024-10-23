@@ -130,6 +130,12 @@
         "$mod SHIFT ALT, j, resizeactive, 0 30"
         "$mod SHIFT ALT, k, resizeactive, 0 -30"
         "$mod SHIFT ALT, l, resizeactive, 30 0"
+
+        # TODO Moving between workspaces
+        # TODO Moving windows between workspaces
+        # TODO handle floating windows
+        # TODO handle fullscreen modes
+        # TODO handled stashed windows
       ];
     };
   };
