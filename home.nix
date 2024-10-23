@@ -82,6 +82,9 @@
   # TUI git client
   programs.lazygit.enable = true;
 
+  # D-menu and app launcher
+  programs.wofi.enable = true;
+
   # Enable hyprland
   wayland.windowManager.hyprland = {
     enable = true;
@@ -99,10 +102,14 @@
       
       "$mod" = "SUPER";
       "$terminal" = "kitty";
+      "$menu" = "wofi --show drun";
       
       bind = [
         # Terminal emulator
         "$mod, RETURN, exec, $terminal"
+
+        # Menu and app launcher
+        "$mod, R, exec, $menu"
 
         # Kill active window
         "$mod, Q, killactive"
