@@ -4,11 +4,13 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     
+    # Tiling window manager
     hyprland = {
     	url = "github:hyprwm/Hyprland";
     	inputs.nixpkgs.follows = "nixpkgs";
     };
-
+    
+    # Declarative management of dotfiles
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";

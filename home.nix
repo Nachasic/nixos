@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -17,7 +17,7 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = [
+  home.packages = with pkgs; [
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -69,6 +69,38 @@
   #
   home.sessionVariables = {
     # EDITOR = "emacs";
+    # tell Electron apps to use Wayland
+    NIXOS_OZONE_WL = "1";
+  };
+
+  # enable kitty terminal emulator - required for hyprland defaults
+  programs.kitty.enable = true;
+  # Enable hyprland
+  wayland.windowManager.hyprland = {
+    enable = true;
+    
+    plugins = [
+      # inputs.hyprland-plugins.packages."${pkgs.system}".borders-plus-plus
+    ];
+    
+    settings = {
+      decoration = {
+        shadow_offset = "0 5";
+        "col.shadow" = "rgba(00000099)";
+      };
+      
+      "$mod" = "SUPER";
+      
+      bind = [
+        "$mod, RETURN, exec, kitty"
+      ];
+      
+      # bindm = [
+      #  "$mod, mouse:272, movewindow"
+      #  "$mod, mouse:273, resizewindow"
+      #  "$mod ALT, mouse:272, resizewindow"
+      #];
+    };
   };
 
   # Let Home Manager install and manage itself.

@@ -106,6 +106,15 @@
 
   # Install firefox.
   programs.firefox.enable = true;
+  programs.hyprland = {
+    enable = true;
+    
+    # use the packaged flake from the inputs
+    package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+    
+    # sync up portal package version
+    portalPackage = inputs.hyprland.packages."${pkgs.system}".xdg-desktop-portal-hyprland;
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -115,7 +124,6 @@
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
-  	kitty
   	git
   ];
 
