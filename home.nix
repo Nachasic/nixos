@@ -34,7 +34,11 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ];})
   ];
+
+  # Enable font configuration
+  fonts.fontconfig.enable = true;
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -85,6 +89,12 @@
   # D-menu and app launcher
   programs.wofi.enable = true;
 
+  # Desktop bar
+  programs.waybar = {
+    enable = true;
+    # TODO configure waybar
+  };
+
   # Enable hyprland
   wayland.windowManager.hyprland = {
     enable = true;
@@ -100,6 +110,9 @@
         shadow_offset = "0 5";
         "col.shadow" = "rgba(00000099)";
       };
+
+      # Autorun
+      "exec-once" = [ "waybar" ];
       
       "$mod" = "SUPER";
       "$terminal" = "kitty";
