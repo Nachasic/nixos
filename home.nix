@@ -228,6 +228,9 @@
         # Kill active window
         "$mod, Q, killactive"
 
+	# Lock screen
+	"$mod SHIFT, up, exec, hyprlock"
+
         # Moving window focus
         "$mod, h, movefocus, l"
         "$mod, j, movefocus, d"
