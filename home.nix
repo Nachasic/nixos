@@ -6,6 +6,12 @@
   home.username = "alexc";
   home.homeDirectory = "/home/alexc";
 
+  # Allow home-manager to install unfree packages
+  nixpkgs.config = {
+    allowUnfree = true;
+    allowUnfreePredicate = (_: true);
+  };
+
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -18,6 +24,17 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    bitwarden
+    vlc
+    slack
+
+    # Utils
+    zip
+    unzip
+    optipng
+    pandoc
+    btop
+
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
