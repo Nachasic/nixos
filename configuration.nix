@@ -85,6 +85,7 @@
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
+  security.pam.services.hyprlock = {};
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -129,6 +130,12 @@
     
     # sync up portal package version
     portalPackage = inputs.hyprland.packages."${pkgs.system}".xdg-desktop-portal-hyprland;
+  };
+
+  # System-wide styling
+  stylix = {
+    enable = true;
+    image = inputs.nixy-wallpapers + "/wallpapers/black-oil.png";
   };
 
   # Allow unfree packages

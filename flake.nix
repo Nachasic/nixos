@@ -22,15 +22,15 @@
     };
 
     # Lovely wallpapers
-    nixy-wallpapers = {
-      url = "github:anotherhadi/nixy-wallpapers";
-      flake = false;
-    };
+    # nixy-wallpapers = {
+    #   url = "github:anotherhadi/nixy-wallpapers";
+    #   flake = false;
+    # };
 
     # System-wide styling
     stylix.url = "github:danth/stylix";
 
-    apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
+    # apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
   };
 
   outputs = { self, nixpkgs, ... }@inputs: {
