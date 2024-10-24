@@ -73,8 +73,10 @@
   services.dbus.enable = true;
   xdg.portal = {
     enable = true;
+    config.common.default = "*";
+    xdgOpenUsePortal = true;
     wlr.enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
   };
   
   # Enable bluetooth

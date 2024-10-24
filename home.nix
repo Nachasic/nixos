@@ -112,6 +112,8 @@
     # TODO configure waybar
   };
 
+  # Lock screen
+
   # Enable hyprland
   wayland.windowManager.hyprland = {
     enable = true;
