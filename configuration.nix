@@ -28,7 +28,7 @@
   
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
+  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
   # Enable networking
   networking.networkmanager.enable = true;
 
