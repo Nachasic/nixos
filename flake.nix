@@ -20,6 +20,12 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Lovely wallpapers
+    nixy-wallpapers = {
+      url = "github:anotherhadi/nixy-wallpapers";
+      flake = false;
+    };
   };
 
   outputs = { self, nixpkgs, ... }@inputs: {

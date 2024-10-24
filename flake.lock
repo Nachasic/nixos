@@ -315,6 +315,22 @@
         "type": "github"
       }
     },
+    "nixy-wallpapers": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1729534389,
+        "narHash": "sha256-VlPfWXRtIfJKDaGqbjThqooa1cYV/+jzv2Tx+YN4JXY=",
+        "owner": "anotherhadi",
+        "repo": "nixy-wallpapers",
+        "rev": "3e2ba1a817c45e8a54b26101983ed3a0c57a3ea6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "anotherhadi",
+        "repo": "nixy-wallpapers",
+        "type": "github"
+      }
+    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -344,7 +360,8 @@
         "home-manager": "home-manager",
         "hyprland": "hyprland",
         "hyprland-plugins": "hyprland-plugins",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "nixy-wallpapers": "nixy-wallpapers"
       }
     },
     "systems": {
