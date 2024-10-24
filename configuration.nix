@@ -114,6 +114,7 @@
 
   # Install firefox.
   programs.firefox.enable = true;
+
   programs.hyprland = {
     enable = true;
     
@@ -144,6 +145,8 @@
   # };
 
   # List services that you want to enable:
+  # Enable blueman-applet and blueman-manager
+  services.blueman.enable = true;
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
