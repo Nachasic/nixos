@@ -26,6 +26,11 @@
       url = "github:anotherhadi/nixy-wallpapers";
       flake = false;
     };
+
+    # System-wide styling
+    stylix.url = "github:danth/stylix";
+
+    apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
   };
 
   outputs = { self, nixpkgs, ... }@inputs: {
@@ -34,6 +39,7 @@
       modules = [
         ./configuration.nix
         inputs.home-manager.nixosModules.default
+	inputs.stylix.nixosModules.stylix
       ];
     };
   };

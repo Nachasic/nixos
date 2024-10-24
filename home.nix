@@ -95,7 +95,9 @@
   };
 
   # enable kitty terminal emulator - required for hyprland defaults
-  programs.kitty.enable = true;
+  programs.kitty = {
+    enable = true;
+  };
 
   # TUI file manager
   programs.ranger.enable = true;
@@ -206,10 +208,10 @@
     ];
     
     settings = {
-      decoration = {
-        shadow_offset = "0 5";
-        "col.shadow" = "rgba(00000099)";
-      };
+      # decoration = {
+      #   shadow_offset = "0 5";
+      #   "col.shadow" = "rgba(00000099)";
+      # };
 
       # Autorun
       "exec-once" = [ "waybar" ];
