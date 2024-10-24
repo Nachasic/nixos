@@ -50,6 +50,9 @@
     LC_TIME = "en_GB.UTF-8";
   };
 
+  # Power profiles daemon
+  services.power-profiles-daemon.enable = true;
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
@@ -102,6 +105,7 @@
     description = "Alex Culliere";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
+      nodenv
     #  thunderbird
     ];
   };
@@ -147,6 +151,7 @@
   # List services that you want to enable:
   # Enable blueman-applet and blueman-manager
   services.blueman.enable = true;
+
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
