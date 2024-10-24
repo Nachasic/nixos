@@ -8,7 +8,6 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./themes/stylix/alexc.nix
       inputs.home-manager.nixosModules.default
     ];
 
