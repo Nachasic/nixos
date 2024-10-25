@@ -2,13 +2,14 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, ... }:
-
+{ config, pkgs, inputs, system, ... }:
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
+
+      ./programs/nixvim/default.nix
     ];
 
   # Bootloader.
@@ -89,7 +90,7 @@
   services.pipewire = {
     enable = true;
     alsa.enable = true;
-    alsa.support32Bit = true;
+alsa.support32Bit = true;
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
@@ -135,7 +136,7 @@
   # System-wide styling
   stylix = {
     enable = true;
-    image = inputs.nixy-wallpapers + "/wallpapers/black-oil.png";
+    image = ./assets/wall.png;
   };
 
   # Allow unfree packages

@@ -21,6 +21,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Text editor
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Lovely wallpapers
     # nixy-wallpapers = {
     #   url = "github:anotherhadi/nixy-wallpapers";
@@ -40,6 +46,7 @@
         ./configuration.nix
         inputs.home-manager.nixosModules.default
 	inputs.stylix.nixosModules.stylix
+	inputs.nixvim.nixosModules.nixvim
       ];
     };
   };
