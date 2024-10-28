@@ -137,6 +137,8 @@ alsa.support32Bit = true;
   stylix = {
     enable = true;
     image = ./assets/wall.png;
+    polarity = "dark";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-macchiato.yaml";
   };
 
   # Allow unfree packages
