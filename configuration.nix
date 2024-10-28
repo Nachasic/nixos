@@ -118,6 +118,7 @@ alsa.support32Bit = true;
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     users.alexc = import ./home.nix;
+    backupFileExtension = "backup";
   };
 
   # Install firefox.
@@ -136,9 +137,9 @@ alsa.support32Bit = true;
   # System-wide styling
   stylix = {
     enable = true;
-    image = ./assets/wall.png;
+    image = ./assets/wall.jpg;
     polarity = "dark";
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-macchiato.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
   };
 
   # Allow unfree packages
