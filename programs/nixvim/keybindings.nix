@@ -62,24 +62,49 @@
 
     # telescope keymaps
     {
+      action = "current_buffer_fuzzy_find";
+      key = "<leader>/";
+      options.desc = "[/] Fuzzily search in current buffer";
+    }
+    {
+      action = "buffers";
+      key = "<leader>fb";
+      options.desc = "[f]ind existing [b]uffers";
+    }
+    {
       action = "<cmd>Telescope live_grep<CR>";
-      key = "<leader>fw";
-      options.desc = "Live grep";
+      key = "<leader>fg";
+      options.desc = "[f]ind by [g]rep";
     }
     {
       action = "<cmd>Telescope find_files<CR>";
       key = "<leader>ff";
-      options.desc = "Find files";
+      options.desc = "[f]ind [f]iles";
     }
     {
       action = "<cmd>Telescope git_commits<CR>";
-      key = "<leader>fg";
-      options.desc = "Find commits";
+      key = "<leader>fc";
+      options.desc = "[f]ind [c]ommits";
     }
     {
       action = "<cmd>Telescope oldfiles<CR>";
+      key = "<leader>f?";
+      options.desc = "[f]ind old files";
+    }
+    {
+      action = "grep_string";
+      key = "<leader>fw";
+      options.desc = "[f]ind current [w]ord";
+    }
+    {
+      action = "help_tags";
       key = "<leader>fh";
-      options.desc = "Find old files";
+      options.desc = "[f]ind [h]elp";
+    }
+    {
+      action = "keymaps";
+      key = "<leader>fk";
+      options.desc = "[f]ind [k]eymaps";
     }
   ];
 }
