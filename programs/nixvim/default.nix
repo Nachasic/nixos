@@ -1,4 +1,4 @@
-{
+{ pkgs, ...}: {
   programs.nixvim = {
     imports = [
       ./plugins.nix
@@ -20,6 +20,32 @@
 
       shiftwidth = 2;
     };
+
+    extraPackages = with pkgs; [
+      # Formatters
+      prettierd
+      rustfmt
+      shfm
+      nixfmt-rfc-style
+      stylua
+      nodePackages.prettier
+
+      # Linters
+      eslint_d
+      gitlint
+      html-tidy
+      luajitPackages.luacheck
+      markdownlint-cli
+      nodePackages.jsonlint
+      shellcheck
+      yamllint
+
+      # Utilities
+      ripgrep
+      python3
+      tmux-sessionizer
+      typescript
+    ];
 
 
     # autoreload files from disk

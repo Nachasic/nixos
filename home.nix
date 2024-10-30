@@ -1,5 +1,9 @@
-{ config, pkgs, inputs, ... }:
-
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -26,7 +30,12 @@
   home.packages = with pkgs; [
     bitwarden
     vlc
-    slack
+    # slack
+
+    brightnessctl
+    wlr-randr
+    wl-clipboard
+    pavucontrol
 
     # Utils
     zip
@@ -34,7 +43,6 @@
     optipng
     pandoc
     btop
-    ripgrep-all
 
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
@@ -52,7 +60,12 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ];})
+    (nerdfonts.override {
+      fonts = [
+        "FiraCode"
+        "DroidSansMono"
+      ];
+    })
   ];
 
   # Enable font configuration
@@ -120,15 +133,15 @@
     enable = true;
     settings = {
       general = {
-	grace = 3;
-	no_fade_in = false;
-	disable_loading_bar = false;
+        grace = 3;
+        no_fade_in = false;
+        disable_loading_bar = false;
       };
 
       # BACKGROUND
       background = {
         monitor = "";
-        # path = imageStr;
+        path = "~/Projects/nixos/assets/wall.jpg";
         blur_passes = 0;
         contrast = 0.8916;
         brightness = 0.7172;
@@ -177,24 +190,26 @@
       ];
 
       # INPUT FIELD
-      input-field = [{
-        monitor = "";
-        size = "300, 60";
-        outline_thickness = 2;
-        dots_size = 0.2; # Scale of input-field height, 0.2 - 0.8
-        dots_spacing = 0.2; # Scale of dots' absolute size, 0.0 - 1.0
-        dots_center = true;
-        outer_color = "rgba(255, 255, 255, 0)";
-        inner_color = "rgba(255, 255, 255, 0.1)";
-        # font_color = foreground;
-        fade_on_empty = false;
-        # font_family = font + " Bold";
-        placeholder_text = "<i>🔒 Enter Password</i>";
-        hide_input = false;
-        position = "0, -250";
-        halign = "center";
-        valign = "center";
-      }];
+      input-field = [
+        {
+          monitor = "";
+          size = "300, 60";
+          outline_thickness = 2;
+          dots_size = 0.2; # Scale of input-field height, 0.2 - 0.8
+          dots_spacing = 0.2; # Scale of dots' absolute size, 0.0 - 1.0
+          dots_center = true;
+          outer_color = "rgba(255, 255, 255, 0)";
+          inner_color = "rgba(255, 255, 255, 0.1)";
+          # font_color = foreground;
+          fade_on_empty = false;
+          # font_family = font + " Bold";
+          placeholder_text = "<i>🔒 Enter Password</i>";
+          hide_input = false;
+          position = "0, -250";
+          halign = "center";
+          valign = "center";
+        }
+      ];
     };
   };
 
@@ -202,13 +217,45 @@
   wayland.windowManager.hyprland = {
     enable = true;
     package = inputs.hyprland.packages."${pkgs.system}".hyprland;
-    
+
     plugins = with inputs.hyprland-plugins.packages."${pkgs.system}"; [
       borders-plus-plus
-      
     ];
-    
+
     settings = {
+      animations = {
+        enabled = true;
+        bezier = [
+          "linear, 0, 0, 1, 1"
+          "md3_standard, 0.2, 0, 0, 1"
+          "md3_decel, 0.05, 0.7, 0.1, 1"
+          "md3_accel, 0.3, 0, 0.8, 0.15"
+          "overshot, 0.05, 0.9, 0.1, 1.1"
+          "crazyshot, 0.1, 1.5, 0.76, 0.92"
+          "hyprnostretch, 0.05, 0.9, 0.1, 1.0"
+          "menu_decel, 0.1, 1, 0, 1"
+          "menu_accel, 0.38, 0.04, 1, 0.07"
+          "easeInOutCirc, 0.85, 0, 0.15, 1"
+          "easeOutCirc, 0, 0.55, 0.45, 1"
+          "easeOutExpo, 0.16, 1, 0.3, 1"
+          "softAcDecel, 0.26, 0.26, 0.15, 1"
+          "md2, 0.4, 0, 0.2, 1"
+        ];
+
+        animation = [
+          "windows, 1, 1.5, md3_decel, popin 60%"
+          "windowsIn, 1, 1.5, md3_decel, popin 60%"
+          "windowsOut, 1, 1.5, md3_accel, popin 60%"
+          "border, 1, 3, default"
+          "fade, 1, 1.5, md3_decel"
+          "layersIn, 1, 1.5, menu_decel, slide"
+          "layersOut, 1, 1.5, menu_accel"
+          "fadeLayersIn, 1, 1.5, menu_decel"
+          "fadeLayersOut, 1, 1.5, menu_accel"
+          "workspaces, 1, 1.5, menu_decel, slide"
+          "specialWorkspace, 1, 1.5, md3_decel, slidevert"
+        ];
+      };
       # decoration = {
       #   shadow_offset = "0 5";
       #   "col.shadow" = "rgba(00000099)";
@@ -216,69 +263,82 @@
 
       # Autorun
       "exec-once" = [ "waybar" ];
-      
+
+      # Monitor scaling
+      monitor = "eDP-1, 2560x1600@165, auto, 1.25";
+
       "$mod" = "SUPER";
       "$terminal" = "kitty";
       "$menu" = "wofi --show drun";
-      
-      bind = [
-        # Terminal emulator
-        "$mod, RETURN, exec, $terminal"
 
-        # Menu and app launcher
-        "$mod, R, exec, $menu"
+      bind =
+        [
+          # Terminal emulator
+          "$mod, RETURN, exec, $terminal"
 
-        # Kill active window
-        "$mod, Q, killactive"
+          # Menu and app launcher
+          "$mod, R, exec, $menu"
 
-	# Lock screen
-	"$mod SHIFT, up, exec, hyprlock"
+          # Kill active window
+          "$mod, Q, killactive"
 
-        # Moving window focus
-        "$mod, h, movefocus, l"
-        "$mod, j, movefocus, d"
-        "$mod, k, movefocus, u"
-        "$mod, l, movefocus, r"
-        
-        # Moving windows around
-        "$mod SHIFT, H, movewindow, l"
-        "$mod SHIFT, J, movewindow, d"
-        "$mod SHIFT, K, movewindow, u"
-        "$mod SHIFT, L, movewindow, r"
+          # Lock screen
+          "$mod SHIFT, up, exec, hyprlock"
 
-        # Resizing windows
-        "$mod ALT, h, resizeactive, -10 0"
-        "$mod ALT, j, resizeactive, 0 10"
-        "$mod ALT, k, resizeactive, 0 -10"
-        "$mod ALT, l, resizeactive, 10 0"
+          # Moving window focus
+          "$mod, h, movefocus, l"
+          "$mod, j, movefocus, d"
+          "$mod, k, movefocus, u"
+          "$mod, l, movefocus, r"
 
-	# Resize windows quicker
-        "$mod SHIFT ALT, h, resizeactive, -30 0"
-        "$mod SHIFT ALT, j, resizeactive, 0 30"
-        "$mod SHIFT ALT, k, resizeactive, 0 -30"
-        "$mod SHIFT ALT, l, resizeactive, 30 0"
+          # Moving windows around
+          "$mod SHIFT, H, movewindow, l"
+          "$mod SHIFT, J, movewindow, d"
+          "$mod SHIFT, K, movewindow, u"
+          "$mod SHIFT, L, movewindow, r"
 
-        # Handle floating windows
-        "$mod, SPACE, togglefloating"
+          # Resizing windows
+          "$mod ALT, h, resizeactive, -10 0"
+          "$mod ALT, j, resizeactive, 0 10"
+          "$mod ALT, k, resizeactive, 0 -10"
+          "$mod ALT, l, resizeactive, 10 0"
 
-        # Handle fullscreen modes
-        "$mod, f, fullscreen"
+          # Resize windows quicker
+          "$mod SHIFT ALT, h, resizeactive, -30 0"
+          "$mod SHIFT ALT, j, resizeactive, 0 30"
+          "$mod SHIFT ALT, k, resizeactive, 0 -30"
+          "$mod SHIFT ALT, l, resizeactive, 30 0"
 
-        # TODO handled stashed windows
-      ] ++ (
-        # Configure workspaces
-        builtins.concatLists(builtins.genList (i:
-          let ws = i + 1;
-          in [
-            # Switching to a workspace by number
-            "$mod, code:1${toString i}, workspace, ${toString ws}"
+          # Handle floating windows
+          "$mod, SPACE, togglefloating"
 
-            # Move active window to a workspace by number
-            "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
-          ]
-        )  
-        9)
-      );
+          # Handle fullscreen modes
+          "$mod, f, fullscreen"
+
+          # TODO handled stashed windows
+
+          # Brightness control
+          "$mod, f7, exec, brightnessctl s +10"
+          "$mod, f8, exec, brightnessctl s -10"
+        ]
+        ++ (
+          # Configure workspaces
+          builtins.concatLists (
+            builtins.genList (
+              i:
+              let
+                ws = i + 1;
+              in
+              [
+                # Switching to a workspace by number
+                "$mod, code:1${toString i}, workspace, ${toString ws}"
+
+                # Move active window to a workspace by number
+                "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
+              ]
+            ) 9
+          )
+        );
     };
   };
 
