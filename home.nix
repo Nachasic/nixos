@@ -31,6 +31,8 @@
     bitwarden
     vlc
     # slack
+    syncthing
+    obsidian
 
     brightnessctl
     wlr-randr
@@ -84,6 +86,22 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+  };
+
+  # Configure Electron apps to render properly
+  xdg.configFile."electron-flags.conf".text = ''
+    --enable-features=UseOzonePlatform
+    --ozone-platform=wayland
+  '';
+
+  xdg.desktopEntries = {
+    obsidian = {
+      name = "Obsidian";
+      exec = "obsidian --enable-features=UseOzonePlatform --ozone-platform=wayland";
+      icon = "obsidian";
+      type = "Application";
+      categories = [ "Office" ];
+    };
   };
 
   # Home Manager can also manage your environment variables through
@@ -262,7 +280,10 @@
       # };
 
       # Autorun
-      "exec-once" = [ "waybar" ];
+      "exec-once" = [
+        "waybar"
+        "syncthing"
+      ];
 
       # Monitor scaling
       monitor = "eDP-1, 2560x1600@165, auto, 1.25";
