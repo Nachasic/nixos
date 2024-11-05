@@ -2,15 +2,21 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, system, ... }:
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.default
+  config,
+  pkgs,
+  inputs,
+  system,
+  ...
+}:
+{
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    inputs.home-manager.nixosModules.default
 
-      ./programs/nixvim/default.nix
-    ];
+    ./programs/nixvim/default.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -18,7 +24,7 @@
 
   boot.initrd.luks.devices."luks-66525123-d487-47fe-a1da-f3c83d140933".device = "/dev/disk/by-uuid/66525123-d487-47fe-a1da-f3c83d140933";
   networking.hostName = "alexc-nix"; # Define your hostname
-  
+
   # Use latest kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -26,9 +32,12 @@
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-  
+
   # Enable flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
   # Enable networking
   networking.networkmanager.enable = true;
@@ -79,18 +88,18 @@
     wlr.enable = true;
     extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
   };
-  
+
   # Enable bluetooth
   hardware.bluetooth.enable = true;
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
-  security.pam.services.hyprlock = {};
+  security.pam.services.hyprlock = { };
   services.pipewire = {
     enable = true;
     alsa.enable = true;
-alsa.support32Bit = true;
+    alsa.support32Bit = true;
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
@@ -107,16 +116,21 @@ alsa.support32Bit = true;
   users.users.alexc = {
     isNormalUser = true;
     description = "Alex Culliere";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     packages = with pkgs; [
-      nodenv
-    #  thunderbird
+      # nodenv
+      #  thunderbird
     ];
   };
-  
+
   # home-manager config
   home-manager = {
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = {
+      inherit inputs;
+    };
     users.alexc = import ./home.nix;
     backupFileExtension = "backup";
   };
@@ -126,10 +140,10 @@ alsa.support32Bit = true;
 
   programs.hyprland = {
     enable = true;
-    
+
     # use the packaged flake from the inputs
     package = inputs.hyprland.packages."${pkgs.system}".hyprland;
-    
+
     # sync up portal package version
     portalPackage = inputs.hyprland.packages."${pkgs.system}".xdg-desktop-portal-hyprland;
   };
@@ -148,9 +162,9 @@ alsa.support32Bit = true;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-  	git
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
+    git
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -164,7 +178,6 @@ alsa.support32Bit = true;
   # List services that you want to enable:
   # Enable blueman-applet and blueman-manager
   services.blueman.enable = true;
-
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
