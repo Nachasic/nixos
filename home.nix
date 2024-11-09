@@ -340,8 +340,8 @@
           # TODO handled stashed windows
 
           # Brightness control
-          "$mod, f7, exec, brightnessctl s +10"
-          "$mod, f8, exec, brightnessctl s -10"
+          ", XF86MonBrightnessUp, exec, brightnessctl -q set +5%"
+          ", XF86MonBrightnessDown, exec, brightnessctl -q set 5%-"
         ]
         ++ (
           # Configure workspaces
