@@ -207,6 +207,7 @@
         grace = 3;
         no_fade_in = false;
         disable_loading_bar = false;
+        enable_fingerprint = true;
       };
 
       # BACKGROUND
