@@ -79,6 +79,12 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # Ollama
+  services.ollama = {
+    enable = true;
+    acceleration = false;
+  };
+
   # Configure desktop portal for screen sharing
   services.dbus.enable = true;
   xdg.portal = {

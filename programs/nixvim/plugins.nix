@@ -175,13 +175,59 @@
       };
     };
   };
+
+  extraPlugins = with pkgs; [
+    (vimUtils.buildVimPlugin {
+      name = "codecompanion";
+      src = pkgs.fetchFromGitHub {
+        owner = "olimorris";
+        repo = "codecompanion.nvim";
+        rev = "9906e3a";
+        hash = "sha256-r+PKDMJQZZ40MXg0XlWCLwPTWUUa1YrdNrOm9rYGa0Q=";
+      };
+    })
+
+    (vimUtils.buildVimPlugin {
+      name = "plenary";
+      src = pkgs.fetchFromGitHub {
+        owner = "nvim-lua";
+        repo = "plenary.nvim";
+        rev = "v0.1.4";
+        hash = "sha256-zR44d9MowLG1lIbvrRaFTpO/HXKKrO6lbtZfvvTdx+o=";
+      };
+    })
+  ];
+
   extraConfigLua = ''
-        vim.keymap.set('n', 'zK', function()
-          local winid = require('ufo').peekFoldedLinesUnderCursor()
-          if not winid then
-    	vim.lsp.buf.hover()
-          end
-        end, { desc = "Pee[k] fold" })
+        	-- Code companion setup
+        	require("codecompanion").setup({
+        	  adapters = {
+        	    ollama = function()
+        	      return require("codecompanion.adapters").extend("ollama", {
+        		schema = {
+        		  model = { default = "deepseek-coder-v2:16b", },
+        		},
+    		env = { url = "http://localhost:11434"},
+    		headers = {
+    		  ["Content-Type"] = "application/json",
+    		},
+    		parameters = { sync = true, },
+        	      })
+        	    end,
+        	  },
+        	  strategies = {
+        	    chat = { adapter = "ollama", },
+        	    inline = { adapter = "ollama", },
+        	    agent = { adapter = "ollama", },
+        	  }
+        	})
+
+            vim.keymap.set('n', 'zK', function()
+              local winid = require('ufo').peekFoldedLinesUnderCursor()
+              if not winid then
+                vim.lsp.buf.hover()
+              end
+            end, { desc = "Pee[k] fold" })
   '';
   extraConfigLuaPre = ''
     -- Formatting function for conform
