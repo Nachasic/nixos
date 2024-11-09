@@ -64,6 +64,9 @@
   # Power profiles daemon
   services.power-profiles-daemon.enable = true;
 
+  # Firmware update service
+  services.fwupd.enable = true;
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
