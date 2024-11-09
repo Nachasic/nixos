@@ -131,9 +131,12 @@
       "wheel"
     ];
     packages = with pkgs; [
+      nushell
       # nodenv
       #  thunderbird
     ];
+    shell = pkgs.nushell;
+    useDefaultShell = true;
   };
 
   # home-manager config

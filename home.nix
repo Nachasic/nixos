@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  lib,
   ...
 }:
 {
@@ -90,10 +91,14 @@
   };
 
   # Configure Electron apps to render properly
-  xdg.configFile."electron-flags.conf".text = ''
-    --enable-features=UseOzonePlatform
-    --ozone-platform=wayland
-  '';
+  xdg.configFile = {
+    "electron-flags.conf".text = ''
+      --enable-features=UseOzonePlatform
+      --ozone-platform=wayland
+    '';
+    "ranger/rc.conf".source = ./programs/ranger/rc.conf;
+    "ranger/rifle.conf".source = ./programs/ranger/rifle.conf;
+  };
 
   xdg.desktopEntries = {
     obsidian = {
@@ -146,6 +151,32 @@
     # EDITOR = "emacs";
     # tell Electron apps to use Wayland
     NIXOS_OZONE_WL = "1";
+  };
+
+  # Shell
+  programs.nushell = {
+    enable = true;
+    configFile.source = ./programs/nushell/config.nu;
+  };
+
+  programs.carapace = {
+    enable = true;
+    enableNushellIntegration = true;
+  };
+
+  programs.starship = {
+    enable = true;
+    settings = {
+      add_newline = true;
+      format = lib.concatStrings [
+        "$directory"
+        "$git_branch"
+        "$character"
+      ];
+      git_branch = {
+        style = "bold";
+      };
+    };
   };
 
   # enable kitty terminal emulator - required for hyprland defaults
