@@ -101,7 +101,9 @@
     config.common.default = "*";
     xdgOpenUsePortal = true;
     wlr.enable = true;
-    extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+    ];
   };
 
   # Enable bluetooth
