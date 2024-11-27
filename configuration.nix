@@ -7,6 +7,7 @@
   pkgs,
   inputs,
   system,
+  lib,
   ...
 }:
 {
@@ -22,6 +23,9 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  # Allow access to privileged ports above or equal to 80
+  boot.kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = 0;
 
   boot.initrd.luks.devices."luks-66525123-d487-47fe-a1da-f3c83d140933".device = "/dev/disk/by-uuid/66525123-d487-47fe-a1da-f3c83d140933";
   networking.hostName = "alexc-nix"; # Define your hostname
@@ -136,6 +140,7 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "docker"
     ];
     packages = with pkgs; [
       nushell
@@ -144,6 +149,15 @@
     ];
     shell = pkgs.nushell;
     useDefaultShell = true;
+  };
+
+  # Enable docker
+  virtualisation.docker = {
+    enable = true;
+    # rootless = {
+    #   enable = true;
+    #   setSocketVariable = true;
+    # };
   };
 
   # home-manager config
@@ -162,10 +176,11 @@
     enable = true;
 
     # use the packaged flake from the inputs
-    package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+    package = inputs.hyprland.packages."${pkgs.stdenv.hostPlatform.system}".hyprland;
 
     # sync up portal package version
-    portalPackage = inputs.hyprland.packages."${pkgs.system}".xdg-desktop-portal-hyprland;
+    portalPackage =
+      inputs.hyprland.packages."${pkgs.stdenv.hostPlatform.system}".xdg-desktop-portal-hyprland;
   };
 
   # System-wide styling

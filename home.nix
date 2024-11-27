@@ -49,6 +49,7 @@
     dunst
     tree
     qbittorrent
+    chromium
 
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
@@ -131,6 +132,15 @@
         StartupWMClass = "Slack";
       };
     };
+
+    chromium = {
+      name = "Chromium";
+      comment = "Chromium Browser";
+      exec = "chromium --enable-features=UseOzonePlatform --ozone-platform=wayland";
+      icon = "chromium";
+      type = "Application";
+      categories = [ "Office" ];
+    };
   };
 
   # Home Manager can also manage your environment variables through
@@ -153,6 +163,7 @@
     # EDITOR = "emacs";
     # tell Electron apps to use Wayland
     NIXOS_OZONE_WL = "1";
+    MOZ_ENABLE_WAYLAND = "1";
 
     EDITOR = "nvim";
     BROWSER = "firefox";
