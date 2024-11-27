@@ -153,6 +153,20 @@
     # EDITOR = "emacs";
     # tell Electron apps to use Wayland
     NIXOS_OZONE_WL = "1";
+
+    EDITOR = "nvim";
+    BROWSER = "firefox";
+
+    # Desktop environment settings
+    XDG_CURRENT_DESKTOP = "Hyprland";
+    XDG_SESSION_DESKTOP = "Hyprland";
+    XDG_SESSION_TYPE = "wayland";
+
+    # File path settings
+    XDG_CACHE_HOME = "\${HOME}/.cache";
+    XDG_CONFIG_HOME = "\${HOME}/.config";
+    XDG_BIN_HOME = "\${HOME}/.local/bin";
+    XDG_DATA_HOME = "\${HOME}/.local/share";
   };
 
   # Shell
@@ -215,7 +229,7 @@
       # BACKGROUND
       background = {
         monitor = "";
-        path = "~/Projects/nixos/assets/wall.jpg";
+        # path = "~/Projects/nixos/assets/wall.jpg";
         blur_passes = 0;
         contrast = 0.8916;
         brightness = 0.7172;
@@ -264,26 +278,26 @@
       ];
 
       # INPUT FIELD
-      input-field = [
-        {
-          monitor = "";
-          size = "300, 60";
-          outline_thickness = 2;
-          dots_size = 0.2; # Scale of input-field height, 0.2 - 0.8
-          dots_spacing = 0.2; # Scale of dots' absolute size, 0.0 - 1.0
-          dots_center = true;
-          outer_color = "rgba(255, 255, 255, 0)";
-          inner_color = "rgba(255, 255, 255, 0.1)";
-          # font_color = foreground;
-          fade_on_empty = false;
-          # font_family = font + " Bold";
-          placeholder_text = "<i>🔒 Enter Password</i>";
-          hide_input = false;
-          position = "0, -250";
-          halign = "center";
-          valign = "center";
-        }
-      ];
+      # input-field = [
+      #   {
+      #     monitor = "";
+      #     size = "300, 60";
+      #     outline_thickness = 2;
+      #     dots_size = 0.2; # Scale of input-field height, 0.2 - 0.8
+      #     dots_spacing = 0.2; # Scale of dots' absolute size, 0.0 - 1.0
+      #     dots_center = true;
+      #     outer_color = "rgba(255, 255, 255, 0)";
+      #     inner_color = "rgba(255, 255, 255, 0.1)";
+      #     # font_color = foreground;
+      #     fade_on_empty = false;
+      #     # font_family = font + " Bold";
+      #     placeholder_text = "<i>🔒 Enter Password</i>";
+      #     hide_input = false;
+      #     position = "0, -250";
+      #     halign = "center";
+      #     valign = "center";
+      #   }
+      # ];
     };
   };
 
@@ -292,9 +306,9 @@
     enable = true;
     package = inputs.hyprland.packages."${pkgs.system}".hyprland;
 
-    plugins = with inputs.hyprland-plugins.packages."${pkgs.system}"; [
-      borders-plus-plus
-    ];
+    # plugins = with inputs.hyprland-plugins.packages."${pkgs.system}"; [
+    #   borders-plus-plus
+    # ];
 
     settings = {
       animations = {
@@ -337,6 +351,7 @@
 
       # Autorun
       "exec-once" = [
+        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "waybar"
         "syncthing"
       ];
