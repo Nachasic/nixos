@@ -28,6 +28,11 @@
     # tree-sitter with all grammars
     treesitter = {
       enable = true;
+      nixvimInjections = true;
+      settings = {
+        highlight.enable = true;
+        indent.enable = true;
+      };
     };
 
     # autopairs
