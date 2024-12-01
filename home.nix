@@ -34,6 +34,9 @@
     slack
     syncthing
     obsidian
+    libreoffice-qt6
+    hunspell
+    hunspellDicts.en_US
 
     brightnessctl
     wlr-randr
@@ -50,6 +53,7 @@
     tree
     qbittorrent
     chromium
+    aider-chat
 
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
@@ -141,6 +145,18 @@
       type = "Application";
       categories = [ "Office" ];
     };
+
+    calendar = {
+      name = "Google Calendar";
+      comment = "Google Calendar";
+      exec = "chromium --enable-features=UseOzonePlatform --ozone-platform=wayland --app=https://calendar.google.com/";
+      icon = "calendar";
+      type = "Application";
+      categories = [
+        "Office"
+        "Calendar"
+      ];
+    };
   };
 
   # Home Manager can also manage your environment variables through
@@ -178,6 +194,10 @@
     XDG_CONFIG_HOME = "\${HOME}/.config";
     XDG_BIN_HOME = "\${HOME}/.local/bin";
     XDG_DATA_HOME = "\${HOME}/.local/share";
+
+    # Ollama api 
+    OLLAMA_API_BASE = "http://127.0.0.1:11434";
+    OLLAMA_HOST = "127.0.0.1:11435";
   };
 
   # Shell
@@ -387,6 +407,9 @@
 
           # Lock screen
           "$mod SHIFT, up, exec, hyprlock"
+
+          # Suspend system
+          "$mod SHIFT, down, exec, systemctl suspend"
 
           # Moving window focus
           "$mod, h, movefocus, l"
