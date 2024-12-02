@@ -95,6 +95,7 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+    ".aider.model.settings.yml".source = ./aider.model.settings.yml;
   };
 
   # Configure Electron apps to render properly
@@ -181,7 +182,6 @@
     NIXOS_OZONE_WL = "1";
     MOZ_ENABLE_WAYLAND = "1";
 
-    EDITOR = "nvim";
     BROWSER = "firefox";
 
     # Desktop environment settings
@@ -195,15 +195,21 @@
     XDG_BIN_HOME = "\${HOME}/.local/bin";
     XDG_DATA_HOME = "\${HOME}/.local/share";
 
-    # Ollama api 
-    OLLAMA_API_BASE = "http://127.0.0.1:11434";
-    OLLAMA_HOST = "127.0.0.1:11435";
   };
 
   # Shell
   programs.nushell = {
     enable = true;
     configFile.source = ./programs/nushell/config.nu;
+    extraConfig = '''';
+    shellAliases = {
+      aider = "aider --model ollama_chat/qwen:latest";
+    };
+    extraEnv = ''
+      $env.EDITOR = "nvim"
+      $env.OLLAMA_HOST = "127.0.0.1:11435"
+      $env.OLLAMA_API_BASE = "http://127.0.0.1:11435"
+    '';
   };
 
   programs.carapace = {

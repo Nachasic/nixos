@@ -1,0 +1,7 @@
+- name: aider/extra_params
+  extra_params:
+    max_tokens: 8192
+
+- name: ollama_chat/qwen:latest
+  extra_params:
+    num_ctx: 8192
