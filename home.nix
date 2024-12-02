@@ -385,6 +385,7 @@
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "waybar"
         "syncthing"
+        "OLLAMA_HOST=127.0.0.1:11435 ollama serve"
       ];
 
       # Monitor scaling
