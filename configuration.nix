@@ -183,6 +183,9 @@
       inputs.hyprland.packages."${pkgs.stdenv.hostPlatform.system}".xdg-desktop-portal-hyprland;
   };
 
+  # Nix-direnv
+  programs.direnv.enable = true;
+
   # Automatically creates a loader in /lib/* to avoid patching stuff
   # To disable it temporarily use
   # unset NIX_LD
@@ -337,6 +340,7 @@
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
     git
+    lsof
     wev
   ];
 
