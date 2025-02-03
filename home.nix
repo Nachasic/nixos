@@ -32,6 +32,8 @@
     bitwarden
     vlc
     slack
+    discord
+    vesktop
     syncthing
     obsidian
     libreoffice-qt6
@@ -42,6 +44,11 @@
     wlr-randr
     wl-clipboard
     pavucontrol
+    localsend
+    telegram-desktop
+    slurp
+    grim
+    macchina
 
     # Utils
     zip
@@ -54,6 +61,9 @@
     qbittorrent
     chromium
     aider-chat
+
+    # GUI db client
+    jetbrains.datagrip
 
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
@@ -118,6 +128,26 @@
       categories = [ "Office" ];
     };
 
+    vesktop = {
+      name = "Vesktop";
+      comment = "Vesktop Desktop";
+      genericName = "Vesktop Client for Linux";
+      exec = "vesktop -s --enable-features=UseOzonePlatform --ozone-platform=wayland %U";
+      icon = "vesktop";
+      type = "Application";
+      startupNotify = true;
+      categories = [
+        "GNOME"
+        "GTK"
+        "Network"
+        "InstantMessaging"
+      ];
+      mimeType = [ "x-scheme-handler/vesktop" ];
+      settings = {
+        StartupWMClass = "Vesktop";
+      };
+    };
+
     slack = {
       name = "Slack";
       comment = "Slack Desktop";
@@ -135,6 +165,25 @@
       mimeType = [ "x-scheme-handler/slack" ];
       settings = {
         StartupWMClass = "Slack";
+      };
+    };
+
+    datagrip = {
+      name = "Datagrip";
+      comment = "JetBrains Datagrip";
+      genericName = "Datagrip BD client";
+      exec = "datagrip -Dawt.toolkit.name=WLToolkit %U";
+      icon = "datagrip";
+      type = "Application";
+      startupNotify = true;
+      categories = [
+        "GNOME"
+        "GTK"
+        "Network"
+        "InstantMessaging"
+      ];
+      settings = {
+        StartupWMClass = "Datagrip";
       };
     };
 
@@ -411,6 +460,13 @@
 
           # Kill active window
           "$mod, Q, killactive"
+
+          # Screenshot tooling
+          # super+Print to take a screenshot of the main screen
+          ", Print, exec, grim -o eDP-1"
+
+          # super+Shift+Print to take a screenshot of an area 
+          "$mod, Print, exec, grim -g \"$(slurp; sleep .5)\" | wl-copy"
 
           # Lock screen
           "$mod SHIFT, up, exec, hyprlock"
