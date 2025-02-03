@@ -342,6 +342,9 @@
     git
     lsof
     wev
+
+    # Docker TUI client
+    oxker
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
