@@ -1,4 +1,5 @@
-{ pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.nixvim = {
     imports = [
       ./plugins.nix
@@ -46,7 +47,6 @@
       tmux-sessionizer
       typescript
     ];
-
 
     # autoreload files from disk
     # https://neovim.discourse.group/t/a-lua-based-auto-refresh-buffers-when-they-change-on-disk-function/2482/4
