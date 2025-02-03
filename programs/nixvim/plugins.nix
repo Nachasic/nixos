@@ -35,6 +35,13 @@
       };
     };
 
+    gitsigns = {
+      enable = true;
+      settings = {
+        current_line_blame = true;
+      };
+    };
+
     # autopairs
     nvim-autopairs = {
       enable = true;

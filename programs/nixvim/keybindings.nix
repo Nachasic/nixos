@@ -59,7 +59,6 @@
       options.desc = "Cycle to previous buffer";
     }
 
-
     # telescope keymaps
     {
       action = "current_buffer_fuzzy_find";
@@ -105,6 +104,18 @@
       action = "keymaps";
       key = "<leader>fk";
       options.desc = "[f]ind [k]eymaps";
+    }
+
+    # Gitsigns
+    {
+      action = "Stage hunk";
+      key = "<leader>hs";
+      options.desc = "[s]tage [h]unk";
+    }
+    {
+      action = "Reset hunk";
+      key = "<leader>hr";
+      options.desc = "[r]eset [h]unk";
     }
   ];
 }
