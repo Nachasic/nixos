@@ -52,7 +52,10 @@
       enable = true;
       servers = {
         # JS/TS
-        ts_ls.enable = true;
+        vtsls = {
+          enable = true;
+          package = pkgs.vtsls;
+        };
 
         # Lua
         lua_ls.enable = true;
@@ -72,9 +75,13 @@
           installCargo = true;
           installRustc = true;
         };
+
+        clangd.enable = true;
       };
     };
     lsp-lines.enable = true;
+
+    trouble.enable = true;
 
     # telescope
     telescope = {
