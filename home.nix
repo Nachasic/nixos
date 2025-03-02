@@ -81,12 +81,6 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    (nerdfonts.override {
-      fonts = [
-        "FiraCode"
-        "DroidSansMono"
-      ];
-    })
   ];
 
   # Enable font configuration
@@ -465,7 +459,7 @@
           # super+Print to take a screenshot of the main screen
           ", Print, exec, grim -o eDP-1"
 
-          # super+Shift+Print to take a screenshot of an area 
+          # super+Shift+Print to take a screenshot of an area
           "$mod, Print, exec, grim -g \"$(slurp; sleep .5)\" | wl-copy"
 
           # Lock screen

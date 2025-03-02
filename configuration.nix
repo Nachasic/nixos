@@ -27,7 +27,8 @@
   # Allow access to privileged ports above or equal to 80
   boot.kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = 0;
 
-  boot.initrd.luks.devices."luks-66525123-d487-47fe-a1da-f3c83d140933".device = "/dev/disk/by-uuid/66525123-d487-47fe-a1da-f3c83d140933";
+  boot.initrd.luks.devices."luks-66525123-d487-47fe-a1da-f3c83d140933".device =
+    "/dev/disk/by-uuid/66525123-d487-47fe-a1da-f3c83d140933";
   networking.hostName = "alexc-nix"; # Define your hostname
 
   # Use latest kernel
@@ -71,7 +72,7 @@
   # Firmware update service
   services.fwupd.enable = true;
 
-  # Fingerprint service 
+  # Fingerprint service
   services.fprintd = {
     enable = true;
   };
@@ -114,7 +115,7 @@
   hardware.bluetooth.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   security.pam.services.hyprlock = { };
   services.pipewire = {
@@ -283,11 +284,6 @@
       libtiff
       pixman
       speex
-      SDL_image
-      SDL_ttf
-      SDL_mixer
-      SDL2_ttf
-      SDL2_mixer
       libappindicator-gtk2
       libdbusmenu-gtk2
       libindicator-gtk2
@@ -300,7 +296,6 @@
       libvdpau
       # ...
       # Some more libraries that I needed to run programs
-      gnome2.pango
       cairo
       atk
       gdk-pixbuf
@@ -329,7 +324,13 @@
     image = ./assets/wall.jpg;
     polarity = "dark";
     base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
+    homeManagerIntegration.followSystem = true;
   };
+
+  fonts.packages = with pkgs; [
+    nerd-fonts.fira-code
+    nerd-fonts.droid-sans-mono
+  ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
