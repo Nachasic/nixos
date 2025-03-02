@@ -77,6 +77,8 @@
         };
 
         clangd.enable = true;
+
+        sqls.enable = true;
       };
     };
     lsp-lines.enable = true;
@@ -139,7 +141,7 @@
     # Formatting
     conform-nvim = {
       enable = true;
-      formattersByFt = {
+      formatters_by_ft = {
         css = [
           "prettierd"
           "prettier"
