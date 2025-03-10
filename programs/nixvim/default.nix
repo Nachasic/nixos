@@ -6,6 +6,14 @@
       ./keybindings.nix
     ];
 
+    clipboard = {
+      register = [
+        "unnamed"
+        "unnamedplus"
+      ];
+      providers.wl-copy.enable = true;
+    };
+
     enable = true;
 
     # general options
