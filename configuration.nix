@@ -238,6 +238,7 @@
       xorg.libSM
       xorg.libICE
       gnome2.GConf
+      pango
       nspr
       nss
       cups
