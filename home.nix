@@ -391,6 +391,10 @@
     # ];
 
     settings = {
+      input.touchpad = {
+        natural_scroll = true;
+        disable_while_typing = true;
+      };
       animations = {
         enabled = true;
         bezier = [
