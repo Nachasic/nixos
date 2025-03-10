@@ -1,5 +1,6 @@
 { pkgs, ... }:
 {
+
   plugins = {
     # Icons
     web-devicons.enable = true;
@@ -84,6 +85,14 @@
     lsp-lines.enable = true;
 
     trouble.enable = true;
+
+    dap = {
+      enable = true;
+      settings = {
+        ui.enable = true;
+
+      };
+    };
 
     # telescope
     telescope = {
