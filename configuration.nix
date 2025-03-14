@@ -6,6 +6,7 @@
   config,
   pkgs,
   inputs,
+  stable,
   system,
   lib,
   ...
@@ -17,7 +18,9 @@
     inputs.nixos-hardware.nixosModules.framework-16-7040-amd
     inputs.home-manager.nixosModules.default
 
-    ./programs/nixvim/default.nix
+    (import ./programs/nixvim/default.nix {
+      inherit stable pkgs;
+    })
   ];
 
   # Bootloader.

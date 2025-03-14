@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, stable, ... }:
 {
 
   plugins = {
@@ -68,6 +68,11 @@
             expr = "import <nixpkgs> {}";
             extraOptions.offset_encoding = "utf-8";
           };
+        };
+
+        graphql = {
+          enable = true;
+          package = stable.nodePackages.graphql-language-service-cli;
         };
 
         # Rust

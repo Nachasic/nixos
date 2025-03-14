@@ -1,8 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, stable, ... }:
 {
   programs.nixvim = {
     imports = [
-      ./plugins.nix
+      (import ./plugins.nix { inherit stable pkgs; })
       ./keybindings.nix
     ];
 
